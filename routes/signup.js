@@ -14,13 +14,14 @@ router.post("/", async (req, res) => {
   try {
     const { username, password } = req.body;
     let newUser = { username, password };
+    console.log("NICKY JUST CHECKING ", newUser);
     db[username] = newUser;
     let token;
     try {
       token = jwt.sign(
         {
-          userId: newUser.id,
-          email: newUser.email,
+          username: username,
+          password: password,
         },
         "secretkeyappearshere",
         { expiresIn: "1h" }
@@ -29,8 +30,8 @@ router.post("/", async (req, res) => {
       res.status(201).json({
         success: true,
         data: {
-          userId: newUser.id,
-          email: newUser.email,
+          username: username,
+          password: password,
           token: token,
         },
       });

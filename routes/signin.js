@@ -26,8 +26,8 @@ router.post("/", async (req, res, next) => {
     //Creating jwt token
     token = jwt.sign(
       {
-        userId: existingUser.id,
-        email: existingUser.email,
+        username: username,
+        password: password,
       },
       "secretkeyappearshere",
       { expiresIn: "1h" }
@@ -41,8 +41,8 @@ router.post("/", async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: {
-      userId: existingUser.id,
-      email: existingUser.email,
+      username: username,
+      password: password,
       token: token,
     },
   });
